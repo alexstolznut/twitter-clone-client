@@ -20,10 +20,15 @@ class Home extends Component {
     }
 
     render() {
+        let recentScreamsMarkup = this.state.screams ? (
+            this.state.screams.map(scream => {
+               return <p key={scream.screamId}>{scream.body}</p>
+            }) 
+        ) : <p>Loading...</p>
         return (
             <Grid container spacing={6}>
                 <Grid item sm={8} xs={12}>
-                    <p>...Content</p>
+                    {recentScreamsMarkup}
                 </Grid>
                 <Grid item sm={4} xs={12}>
                     <p>...Profile</p>
