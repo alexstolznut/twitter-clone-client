@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
-class Signup extends Component {
+class signup extends Component {
     // static propTypes = {
 
     // }
@@ -9,10 +9,10 @@ class Signup extends Component {
     render() {
         return (
             <div>
-                <h1>Signup Page</h1>
+                <h1>signup Page</h1>
             </div>
         )
     }
 }
 
-export default Signup
+export default signup

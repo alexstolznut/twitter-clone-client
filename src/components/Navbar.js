@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import Link from 'react-router-dom/Link'
+import {Link} from 'react-router-dom'
 
 //MUI
 import { makeStyles } from '@material-ui/core/styles';

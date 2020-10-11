@@ -1,18 +1,20 @@
 import React, { Component } from 'react'
 import Grid from '@material-ui/core/Grid';
 import axios from 'axios';
+import ScreamCard from '../components/ScreamCard';
 
-class Home extends Component {
+class home extends Component {
    state = {
        screams: null
    }
     componentDidMount(){
         axios.get('/screams')
-        .then(res => {
-            console.log(res.data)
+        .then((res) => {
+            console.log(typeof res.data)
+            console.log(typeof res.data[0].createdAt);
             this.setState({
                 screams: res.data
-            })
+            });
         })
         .catch(err => {
             console.log(err);
@@ -21,9 +23,8 @@ class Home extends Component {
 
     render() {
         let recentScreamsMarkup = this.state.screams ? (
-            this.state.screams.map(scream => {
-               return <p key={scream.screamId}>{scream.body}</p>
-            }) 
+            this.state.screams.map(scream => <ScreamCard key={scream.screamId} scream={scream}/>
+            ) 
         ) : <p>Loading...</p>
         return (
             <Grid container spacing={6}>
@@ -38,5 +39,5 @@ class Home extends Component {
     }
 }
 
-export default Home
+export default home
 
