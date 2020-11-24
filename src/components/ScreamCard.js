@@ -31,9 +31,6 @@ class ScreamCard extends Component {
     render() {
         const {classes, scream: {userImage, body, createdAt, likeCount, commentCount, userHandle} } = this.props;
         dayjs.extend(relativeTime);
-    //    const a = dayjs();
-    //    const b = dayjs(createdAt);
-    //    const difference = a.to(b)
        
         return (
             <div>
