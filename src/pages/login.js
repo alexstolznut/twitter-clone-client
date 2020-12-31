@@ -8,12 +8,13 @@ import axios from 'axios';
 import Grid from '@material-ui/core/Grid';
 import {Typography} from '@material-ui/core';
 import TextField from '@material-ui/core/TextField';
-import Button from '@material-ui/core/Button'
+import Button from '@material-ui/core/Button';
+import CircularProgress from '@material-ui/core/CircularProgress';
 
 const styles = {
-    formContainer: {
-        textAlign: 'center'
-    },
+     formContainer: {
+    textAlign: 'center'
+  },
     appIcon: {
         width: '5rem',
         height: '5rem',
@@ -32,7 +33,6 @@ const styles = {
         fontSize: '0.8em',
         marginTop: 10
     }
-
 }
 
 
@@ -43,7 +43,7 @@ class login extends Component {
         this.state = {
             email:'',
             password:'',
-            errors: [],
+            errors: {},
             loading: true
         }
     }
@@ -60,6 +60,7 @@ class login extends Component {
         axios.post('/login', userData)
         .then((res) => {
             console.log(res.data);
+            window.localStorage.setItem('FBIdToken', `Bearer ${res.data.tokenId}`);
             this.setState({
                 loading: false
             });
@@ -77,6 +78,12 @@ class login extends Component {
         console.log(event.target.value)
         this.setState({
             [event.target.name]:event.target.value
+        })
+    }
+
+    componentDidMount() {
+        this.setState({
+            loading: false
         })
     }
 
@@ -107,7 +114,11 @@ class login extends Component {
                             {errors.general && (
                                 <Typography variant="body2" className={classes.generalError}>{errors.general}</Typography>
                             ) }
-                        <Button id="submit" name="submit" type="submit" variant="contained" color="primary" className={classes.button}>Submit</Button>
+                        <Button id="submit" name="submit" type="submit" variant="contained" color="primary" 
+                            className={classes.button} 
+                            disabled={loading}>
+                                {this.state.loading === true ? <CircularProgress></CircularProgress> : 'Submit'}
+                        </Button>
                         </div>
                         <small>Don't have an account? Sign up <Link to='/signup'>here</Link></small>
                     </form>
